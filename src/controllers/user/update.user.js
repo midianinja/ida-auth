@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
 
 import { hashPassword } from '../utils';
 
 //update func
 
-// route -> /me/update-password
+// route -> /auth/update-password
 
 // method: PUT
 
@@ -20,7 +19,7 @@ export const update = async (params, body, token) => {
     const Users = mongoose.model('users');
 
     try {
-        let hashedPassword = await hashPassword(body.password);
+        let hashedPassword = await hashPassword(body.senha);
         let data = await Users.findOneAndUpdate(
             { _id: token.userId },
             { $set: { password: hashedPassword } },

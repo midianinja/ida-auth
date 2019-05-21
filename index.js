@@ -1,7 +1,9 @@
 import server from './src/server';
-import path from 'path';
-import express from 'express';
 import mongodb from './src/db';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 mongodb()
     .then(async () => {
         const app = server();
@@ -10,7 +12,7 @@ mongodb()
             if (err) {
                 console.log(err);
             } else {
-                console.log(`Server Running - Listening to port ${8080}`);
+                console.log(`Server Running - Listening to port ${process.env.PORT}`);
             }
         });
     })

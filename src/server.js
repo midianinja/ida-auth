@@ -14,6 +14,8 @@ export default () => {
     app.use(bodyParser.json());
     app.use(cors());
 
+    app.get('/isAlive', (req, res) => res.status(200).send('ninja'));
+
     app.use('/auth', authRouter());
 
     app.use('/open', openRouter());

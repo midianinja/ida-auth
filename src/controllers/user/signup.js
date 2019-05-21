@@ -1,11 +1,14 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
 
 import jwt from 'jsonwebtoken';
 
 import { findByUsername, hashPassword } from '../utils';
 
-let SECRET = 'secret';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+let SECRET = process.env.SECRET;
 
 //signup func
 
@@ -24,7 +27,7 @@ export const signup = async (body) => {
     const Users = mongoose.model('users');
 
     try {
-        let userExists = await findByUsername(body.username);
+        let userExists = await findByUsername(body.email);
 
         if (userExists) return { status: 200, data: { message: 'username already exists' } };
 
@@ -35,7 +38,7 @@ export const signup = async (body) => {
             password: hashedPassword,
         });
 
-        let data = await newUser.save();
+        await newUser.save();
 
         let token = jwt.sign({ username: body.username, userId: newUser._id }, SECRET, { expiresIn: '1h' });
 

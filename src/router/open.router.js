@@ -9,7 +9,7 @@ const openRouter = () => {
 
     var router = express.Router();
 
-    router.get('/hello', (req, res) => res.status(200).send('hello world'));
+    router.get('/hello', (req, res) => console.log(req.url));
 
     return router;
 };

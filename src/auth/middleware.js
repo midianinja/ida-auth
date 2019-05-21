@@ -1,20 +1,10 @@
 import jwt from 'jsonwebtoken';
 
-const SECRET = 'secret';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 let checkToken = (req, res, next) => {
-    switch (req.url.split('/')[1]) {
-        case '':
-        case 'open':
-        case 'auth':
-            return next();
-
-        case 'user':
-            if (req.url.split('/').length < 4) return next();
-        default:
-            break;
-    }
-
     let token = req.headers['x-access-token'] || req.headers['authorization'];
     if (token && token.startsWith('Bearer ')) {
         // Remove Bearer from string
@@ -22,7 +12,7 @@ let checkToken = (req, res, next) => {
     }
 
     if (token) {
-        jwt.verify(token, SECRET, (err, decoded) => {
+        jwt.verify(token, process.env.SECRET, (err, decoded) => {
             if (!err) {
                 req.token = decoded;
 

@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import { findByUsername } from '../utils';
 
-let SECRET = 'secret';
+let SECRET = process.env.SECRET;
 
 //login func
 
