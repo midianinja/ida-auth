@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { handle } from './handler';
+import { handle } from './auth.handler';
 
 //routes of the application that do not require authentication
 

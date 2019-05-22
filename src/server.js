@@ -2,9 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-// import authRouter from "./router/auth.router";
-import publicRouter from './router/public.router';
-import privateRouter from './router/private.router';
+import gatewayRouter from './router/gateway.router';
 import authRouter from './router/auth.router';
 import checkToken from './auth/middleware';
 
@@ -18,9 +16,9 @@ export default () => {
 
     app.use('/auth', authRouter());
 
-    app.use('/public', publicRouter());
+    app.use('/public', gatewayRouter());
 
-    app.use('/private', checkToken, privateRouter());
+    app.use('/private', checkToken, gatewayRouter());
 
     return app;
 };

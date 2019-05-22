@@ -4,6 +4,10 @@ import jwt from 'jsonwebtoken';
 
 import { findByUsername } from '../utils';
 
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 let SECRET = process.env.SECRET;
 
 //login func
