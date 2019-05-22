@@ -1,13 +1,10 @@
 import jwt from 'jsonwebtoken';
-
 import dotenv from 'dotenv';
 
 dotenv.config();
-
 let checkToken = (req, res, next) => {
     let token = req.headers['x-access-token'] || req.headers['authorization'];
     if (token && token.startsWith('Bearer ')) {
-        // Remove Bearer from string
         token = token.slice(7, token.length);
     }
 
@@ -15,7 +12,6 @@ let checkToken = (req, res, next) => {
         jwt.verify(token, process.env.SECRET, (err, decoded) => {
             if (!err) {
                 req.token = decoded;
-
                 return next();
             }
             return res.status(200).send({

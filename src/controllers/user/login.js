@@ -1,13 +1,9 @@
 import bcrypt from 'bcrypt';
-
 import jwt from 'jsonwebtoken';
-
 import { findByUsername } from '../utils';
-
 import dotenv from 'dotenv';
 
 dotenv.config();
-
 let SECRET = process.env.SECRET;
 
 //login func
@@ -27,18 +23,15 @@ let SECRET = process.env.SECRET;
 export const login = async (params, body) => {
     try {
         let userExists = await findByUsername(body.email);
-
-        if (!userExists) return { status: 200, data: { message: 'user not found' } };
         let match;
+        if (!userExists) return { status: 200, data: { message: 'user not found' } };
         if (userExists.password && body.senha) {
             match = await bcrypt.compare(body.senha, userExists.password);
         }
-
         if (match) {
             let token = jwt.sign({ username: body.email, userId: userExists._id }, SECRET, {
                 expiresIn: '1h',
             });
-
             return { status: 200, data: { message: 'sucessfull login', userId: userExists._id, token } };
         } else return { status: 200, data: { message: 'wrong password' } };
     } catch (e) {

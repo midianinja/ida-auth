@@ -15,10 +15,8 @@ export default () => {
     app.get('/isAlive', (req, res) => res.status(200).send('ninja'));
 
     app.use('/auth', authRouter());
-
-    app.use('/public', gatewayRouter());
-
-    app.use('/private', checkToken, gatewayRouter());
+    app.use('/public', gatewayRouter.publicRouter());
+    app.use('/private', checkToken, gatewayRouter.privateRouter());
 
     return app;
 };

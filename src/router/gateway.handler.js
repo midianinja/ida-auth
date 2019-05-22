@@ -1,23 +1,18 @@
-import { external_services } from '../../services.config';
+import proxy from 'express-http-proxy';
 
-const getServiceUrl = (params) => {
-    let root = params.root.toUpperCase();
-    let url = external_services[root] ? external_services[root] : 'http://localhost:8080/notfound';
-    return url;
+const gateway = (req, res) => {
+    const services = [{ path: 'som', root_url: 'http://localhost:3000' }];
+    const service = services.find((s) => req.originalUrl.split('/')[2] === s.path);
+    if(!service) return null;
+    return service.root_url;
 };
 
-export const gateway_handler = (controller) => {
-    return async (req, res) => {
-        const { method, params, body } = req;
-        let url = getServiceUrl(params);
-        let response = await controller.call(null, body, url, method);
-
-        const { status, data } = response;
-
-        if (status != 200) {
-            console.log(data);
-        }
-
-        res.status(status).send(data);
-    };
+const errorHandler = (err, res, next) => {
+    res.status(404).send('Page not found.');
 };
+
+export const gateway_handler = () => proxy(gateway, {
+    forwardPath: (req, res) => `/${req.params[0]}`,
+    proxyErrorHandler: errorHandler,
+});
+

@@ -10,7 +10,6 @@ const authRouter = () => {
     var router = express.Router();
 
     router.post('/login', handle(Users.login));
-
     router.post('/signup', handle(Users.signup));
 
     return router;

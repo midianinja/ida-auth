@@ -1,75 +1,72 @@
-# ida-auth
+# Identidade Ativista (IDA) API
+
+Guia e exemples para incentivar a consistência, a capacidade de manutenção e as manter melhores práticas de todo o projeto.
 
 Esse projeto foi desenvolvido para servir como serviço de autenticação da identidade digital Ativista e api-gateway para os servidores dos diferentes projetos constituintes da rede ativista.
 
-Voce precisará de Node.js e Mongodb instalados e rodando para utilizar esse projeto.
+## Prerequisites
 
-Para adicionar um serviço , insira o nome e a root url do seu servidor em services.config.js
+* [Download and install NodeJS](https://nodejs.org)
+* [Download and install Yarn](https://yarnpkg.com)
+* [Download and install MongoDB](https://docs.mongodb.com/manual/installation/)
+* Download and install Code editor that you prefer
 
-Para utilizar o gateway voce tem duas opções, public e private.
+## Running Locally
 
- /public/*nome/outros/parametros  -> não exige token
- /private/*nome/  -> exige autenticação
+First clone the project: 
 
-![Alt text](/public/diagram.png?raw=true "diagram")
-
-
-# Clonar Projeto
-
-## Instalar Dependências:
-```bash
+```
 git clone git@github.com:midianinja/ida-auth.git
+```
+
+Or via https: 
+
+```
+https://github.com/midianinja/ida-auth.git
+```
+
+Go to the project root folder:
+
+```
 cd ida-auth
+```
+
+In root directory install the dependecies:
+
+```
 yarn install
 ```
 
-# Run 
+Run the mongoDB:
 
-## DEV
-```bash
-yarn run dev 
+```
+sudo service mongod start
 ```
 
-## Run PROD
-```bash
-yarn start
+Start the server locally:
+
+```
+yarn dev
 ```
 
-Signup: 
-    request: 
-        url: `localhost:8080/auth/signup` 
-        body: 
-            email: '*email'
-            senha: '*senha'
-        
-    
-    response: 
-        "userId": "* id on db"
-        "message": "sucessfull signup"
-        "token": "*access token*"
-    
-  
+The default port is 8080
 
 
-Login: 
-    request: 
-        url: `localhost:8080/auth/login` 
-        body: 
-            email: '*email'
-            senha: '*senha'
-        
-    
-    response: 
-        "userId": "* id on db"
-        "message": "sucessfull signup"
-        "token": "*access token*"
-    
-  
- 
+## Running the tests
 
+[...]
 
+## Deployment
 
+[...]
 
+## Built With
 
+* [Yarn](https://yarnpkg.com) - Dependency Management
+* [ESLint](https://eslint.org/) - Source analyze Tool. [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) 
+* [JSDOC](http://usejsdoc.org) - JavaScript Documentation
+* [Express](https://expressjs.com) - NodeJS Framework
 
+## Versioning
 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/midianinja/ida-auth/tags). 

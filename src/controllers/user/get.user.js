@@ -17,9 +17,7 @@ export const getOne = async (params, token) => {
 
     try {
         let data = await Users.findOne({ _id: params.id }, { username: 1, _id: 1 });
-
         if (!data) return { status: 200, data: { message: 'user not found' } };
-
         return { status: 200, data };
     } catch (e) {
         return { status: 500, data: e };
@@ -40,12 +38,9 @@ export const getOne = async (params, token) => {
 
 export const getMe = async (params, token) => {
     const Users = mongoose.model('users');
-
     try {
         let data = await Users.findOne({ _id: token.userId });
-
         if (!data) return { status: 200, data: { message: 'user not found' } };
-
         return { status: 200, data };
     } catch (e) {
         return { status: 500, data: e };

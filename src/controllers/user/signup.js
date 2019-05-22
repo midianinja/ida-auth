@@ -39,7 +39,6 @@ export const signup = async (params, body) => {
         });
 
         await newUser.save();
-
         let token = jwt.sign({ username: body.username, userId: newUser._id }, SECRET, { expiresIn: '1h' });
 
         return { status: 200, data: { userId: newUser._id, message: 'sucessfull signup', token } };
