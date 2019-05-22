@@ -20,7 +20,7 @@ let SECRET = process.env.SECRET;
 //generates token
 // return logged userId and token
 
-export const login = async (body) => {
+export const login = async (params, body) => {
     try {
         let userExists = await findByUsername(body.email);
 

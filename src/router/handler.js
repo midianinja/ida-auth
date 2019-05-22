@@ -10,7 +10,7 @@ export const handle = (controller) => {
                 break;
 
             case 'POST':
-                response = await controller.call(null, body);
+                response = await controller.call(null, params, body, token);
                 break;
 
             case 'PUT':

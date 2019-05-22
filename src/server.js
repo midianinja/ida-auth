@@ -3,8 +3,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 // import authRouter from "./router/auth.router";
-import openRouter from './router/open.router';
-import closeRouter from './router/close.router';
+import publicRouter from './router/public.router';
+import privateRouter from './router/private.router';
 import authRouter from './router/auth.router';
 import checkToken from './auth/middleware';
 
@@ -18,9 +18,9 @@ export default () => {
 
     app.use('/auth', authRouter());
 
-    app.use('/open', openRouter());
+    app.use('/public', publicRouter());
 
-    app.use('/close', checkToken, closeRouter());
+    app.use('/private', checkToken, privateRouter());
 
     return app;
 };

@@ -23,7 +23,7 @@ let SECRET = process.env.SECRET;
 // encrypt password and and create user on database
 //return userId
 
-export const signup = async (body) => {
+export const signup = async (params, body) => {
     const Users = mongoose.model('users');
 
     try {

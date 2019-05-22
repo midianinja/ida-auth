@@ -2,7 +2,7 @@
 
 Esse projeto foi desenvolvido para realizar a autenticação da identidade digital Ativista e servirá como gateway de acesso para o servidor das redes constituintes da rede ativista.
 
-Voce precisará de Node.js e Mongodb instalados e rodando para rodar esse projeto.
+Voce precisará de Node.js e Mongodb instalados e rodando para utilizar esse projeto.
 
 
 
