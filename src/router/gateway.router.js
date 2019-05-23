@@ -4,7 +4,7 @@ import { gateway_handler } from './gateway.handler';
 //routes of the application that do not require authentication
 const publicRouter = () => {
     var router = express.Router();
-    router.use('/:root/*', gateway_handler());
+    router.use('/:root/*', gateway_handler);
     return router;
 };
 

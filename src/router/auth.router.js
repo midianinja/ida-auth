@@ -1,16 +1,11 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import { handle } from './auth.handler';
-
-//routes of the application that do not require authentication
+import { user } from '../controllers';
 
 const authRouter = () => {
-    const Users = mongoose.model('users');
-
     var router = express.Router();
-
-    router.post('/login', handle(Users.login));
-    router.post('/signup', handle(Users.signup));
+    router.post('/login', handle(user.login));
+    router.post('/signup', handle(user.signup));
 
     return router;
 };
