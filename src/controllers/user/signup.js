@@ -23,13 +23,20 @@ let SECRET = process.env.SECRET;
 // encrypt password and and create user on database
 //return userId
 
+import statusCode from '../../status';
+
 export const signup = async (params, body) => {
     const Users = mongoose.model('users');
 
     try {
         let userExists = await findByUsername(body.email);
 
-        if (userExists) return { status: 200, data: { message: 'username already exists' } };
+        if (userExists) {
+            return {
+                status: statusCode.BAD_REQUEST,
+                data: { message: 'username already exists' }
+            };
+        }
 
         let hashedPassword = await hashPassword(body.senha);
 
@@ -41,8 +48,11 @@ export const signup = async (params, body) => {
         await newUser.save();
         let token = jwt.sign({ username: body.username, userId: newUser._id }, SECRET, { expiresIn: '1h' });
 
-        return { status: 200, data: { userId: newUser._id, message: 'sucessfull signup', token } };
+        return {
+            status: statusCode.CREATED,
+            data: { ida: newUser._id, message: 'sucessfull signup', token }
+        };
     } catch (e) {
-        return { status: 500, data: e };
+        return { status: statusCode.INTERNAL_SERVER_ERROR, data: e };
     }
 };
