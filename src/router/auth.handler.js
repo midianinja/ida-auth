@@ -18,12 +18,7 @@ export const handle = (controller) => {
                 response = await controller.call(null, params, body, token);
                 break;
         }
-        const { status, data } = response;
-
-        if (status != 200) {
-            console.log(data);
-        }
-
-        res.status(status).send(data);
+        const { status, data, error } = response;
+        res.status(status.code).send({ data, error });
     };
 };

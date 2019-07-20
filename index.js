@@ -8,7 +8,7 @@ mongodb()
     .then(async () => {
         const app = server();
 
-        app.listen(8080, (err) => {
+        app.listen(process.env.PORT, (err) => {
             if (err) {
                 console.log(err);
             } else {
@@ -20,5 +20,3 @@ mongodb()
         console.log('MONGODB: ', 'Failed to connect.');
         console.log(e);
     });
-
-console.log(server);

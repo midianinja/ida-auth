@@ -19,6 +19,10 @@ export default ({
         code: 401,
         tag: 'unauthorized',
     },
+    UNAUTHORIZED: {
+        code: 401,
+        tag: 'unauthorized',
+    },
     INTERNAL_SERVER_ERROR: {
         code: 500,
         tag: 'internal-server-error',
