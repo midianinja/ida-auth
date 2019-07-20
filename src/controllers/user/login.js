@@ -26,10 +26,15 @@ export const login = async (params, body) => {
     if (!user) return { status: statusCode.UNAUTHORIZED, error: 'user/not-found' }
     const match = await bcrypt.compare(body.password, user.password);
     if (!match) return { status: statusCode.UNAUTHORIZED, error: 'user/wrong-password' };
+
+    
+    await Users.findOneAndUpdate({ _id: user._id }, { last_login: new Date() });
+
     
     let token = jwt.sign({ username: body.username, ida: user._id }, SECRET, {
         expiresIn: '1h',
     });
+
 
     return {
         status: statusCode.ACCEPTED,
