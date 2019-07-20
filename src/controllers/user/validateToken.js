@@ -15,7 +15,6 @@ let SECRET = process.env.SECRET;
  */
 export const validateToken = (params, body) => new Promise((res, rej) => {
   jwt.verify(body.token, SECRET, (err, decoded) => {
-    console.log('decoded: ', decoded);
     if (err) {
       rej({
         status: statusCode.UNAUTHORIZED,
